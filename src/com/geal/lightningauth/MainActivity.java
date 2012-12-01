@@ -79,6 +79,7 @@ public class MainActivity extends Activity implements OnClickListener {
 		IntentResult scanResult = IntentIntegrator.parseActivityResult(requestCode, resultCode, intent);
 		if (scanResult != null) {
 			Log.v("qauth", scanResult.getContents());
+			btn.setVisibility(View.INVISIBLE);
 			this.finishActivity(requestCode);
 
 			dialog = new ProgressDialog(this);
