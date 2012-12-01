@@ -93,8 +93,7 @@ public class MainActivity extends Activity implements OnClickListener {
 	public void onActivityResult(int requestCode, int resultCode, Intent intent) {
 		super.onActivityResult(requestCode, resultCode, intent);
 		IntentResult scanResult = IntentIntegrator.parseActivityResult(requestCode, resultCode, intent);
-		if (scanResult != null) {
-			Log.v("qauth", scanResult.getContents());
+		if ((scanResult != null) && (scanResult.getContents() != null)) {
 			btn.setVisibility(View.GONE);
 			authbtn.setVisibility(View.VISIBLE);
 			this.finishActivity(requestCode);
