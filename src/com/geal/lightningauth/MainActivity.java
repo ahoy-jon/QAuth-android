@@ -64,10 +64,7 @@ public class MainActivity extends Activity implements OnClickListener {
 			Log.v("qauth", scanResult.getContents());
 			this.finishActivity(requestCode);
 
-			// 	Toast.makeText(this, scanResult.getContents(),
-			// 			Toast.LENGTH_SHORT).show();
-			//new DownloadFilesTask(this).execute(scanResult.getContents());
-
+			new AsyncPostTask(this).execute(scanResult.getContents());
 		} else {
 			Log.v("qauth", "failed intent barcode scanning");
 		}
