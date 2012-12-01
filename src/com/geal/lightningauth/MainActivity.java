@@ -57,6 +57,13 @@ public class MainActivity extends Activity implements OnClickListener {
 		integrator.initiateScan();
 	}
 
+	public void onHttpPostResult(Integer status) {
+		Log.v("qauth", "got status: "+status);
+		//Intent myIntent = new Intent(HelloWorldActivity.this, WebActivity.class);
+		//myIntent.putExtra("key", str);
+		//HelloWorldActivity.this.startActivity(myIntent);
+	}
+
 	public void onActivityResult(int requestCode, int resultCode, Intent intent) {
 		super.onActivityResult(requestCode, resultCode, intent);
 		IntentResult scanResult = IntentIntegrator.parseActivityResult(requestCode, resultCode, intent);
@@ -114,7 +121,8 @@ public class MainActivity extends Activity implements OnClickListener {
 			// setProgressPercent(progress[0]);
 		}
 
-		protected void onPostExecute(String res) {
+		protected void onPostExecute(Integer res) {
+			activity.onHttpPostResult(res);
 			//showDialog("Downloaded " + result + " bytes");
 		}
 	}
