@@ -32,6 +32,7 @@ import android.widget.Toast;
 
 public class MainActivity extends Activity implements OnClickListener {
 	private ImageButton btn;
+	private ImageButton authbtn;
 	ProgressDialog dialog;
 
 	@Override
@@ -45,6 +46,9 @@ public class MainActivity extends Activity implements OnClickListener {
 		Log.v("qauth", "b");
 		btn.setOnClickListener((OnClickListener) this);
 		Log.v("qauth", "c");
+		authbtn = (ImageButton) findViewById(R.id.authbutton);
+		Log.v("qauth", "d");
+		authbtn.setOnClickListener((OnClickListener) this);
 	}
 
 	@Override
@@ -55,9 +59,14 @@ public class MainActivity extends Activity implements OnClickListener {
 	}
 
 	public void onClick(View view) {
+		if( btn.getId() == ((ImageButton)view).getId() ){
+			IntentIntegrator integrator = new IntentIntegrator(this);
+			integrator.initiateScan();
+		}
+		else if( authbtn.getId() == ((ImageButton)view).getId() ){
+		}
 		Log.v("qauth", "click");
-		IntentIntegrator integrator = new IntentIntegrator(this);
-		integrator.initiateScan();
+
 	}
 
 	public void onHttpPostResult(Integer status) {
@@ -79,7 +88,8 @@ public class MainActivity extends Activity implements OnClickListener {
 		IntentResult scanResult = IntentIntegrator.parseActivityResult(requestCode, resultCode, intent);
 		if (scanResult != null) {
 			Log.v("qauth", scanResult.getContents());
-			btn.setVisibility(View.INVISIBLE);
+			btn.setVisibility(View.GONE);
+			authbtn.setVisibility(View.VISIBLE);
 			this.finishActivity(requestCode);
 
 			dialog = new ProgressDialog(this);
