@@ -28,11 +28,11 @@ import android.view.View;
 import android.view.Window;
 import android.view.View.OnClickListener;
 import android.widget.ImageButton;
-import android.widget.Toast;
 
 public class MainActivity extends Activity implements OnClickListener {
 	private ImageButton btn;
 	private ImageButton authbtn;
+	private String authurl;
 	ProgressDialog dialog;
 
 	@Override
@@ -64,6 +64,13 @@ public class MainActivity extends Activity implements OnClickListener {
 			integrator.initiateScan();
 		}
 		else if( authbtn.getId() == ((ImageButton)view).getId() ){
+			dialog = new ProgressDialog(this);
+			dialog.setMessage("Authenticating...");
+			dialog.setIndeterminate(true);
+			dialog.setCancelable(false);
+			dialog.show();
+
+			new AsyncPostTask(this).execute(authurl);
 		}
 		Log.v("qauth", "click");
 
@@ -91,14 +98,7 @@ public class MainActivity extends Activity implements OnClickListener {
 			btn.setVisibility(View.GONE);
 			authbtn.setVisibility(View.VISIBLE);
 			this.finishActivity(requestCode);
-
-			dialog = new ProgressDialog(this);
-			dialog.setMessage("Authenticating...");
-			dialog.setIndeterminate(true);
-			dialog.setCancelable(false);
-			dialog.show();
-
-			new AsyncPostTask(this).execute(scanResult.getContents());
+			authurl = scanResult.getContents();
 		} else {
 			Log.v("qauth", "failed intent barcode scanning");
 		}
