@@ -1,14 +1,47 @@
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@drawable/background_tile"
+    android:orientation="vertical"
     tools:context=".MainActivity" >
 
-    <TextView
+    <ImageView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_centerHorizontal="true"
-        android:layout_centerVertical="true"
-        android:text="@string/hello_world" />
+        android:layout_gravity="center_horizontal"
+        android:contentDescription="@string/logo"
+        android:src="@drawable/logo"
+        android:padding="30dp" />
+    
+    <TextView
+        android:layout_width="fill_parent"
+        android:layout_height="40dp"
+        android:textColor="#FFFFFF"
+        android:background="#33000000"
+        android:text="hello" />
+    
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:contentDescription="@string/qr"
+        android:src="@drawable/ombrebas"
+        android:paddingBottom="20dp" />
 
-</RelativeLayout>
+    <ImageButton
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:contentDescription="@string/qr"
+        android:maxHeight="171dp"
+        android:maxWidth="445dp"
+        android:src="@drawable/qr"
+        android:layout_marginLeft="15dp"
+        android:layout_marginRight="15dp"
+        android:layout_marginTop="15dp"
+        android:layout_marginBottom="15dp"
+        
+        />
+
+</LinearLayout>

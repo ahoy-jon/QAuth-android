@@ -4,5 +4,7 @@
     <string name="app_name">LightningAuth</string>
     <string name="hello_world">Hello world!</string>
     <string name="menu_settings">Settings</string>
+    <string name="logo">LightningAuth</string>
+    <string name="qr">Push the QRCode</string>
 
 </resources>
