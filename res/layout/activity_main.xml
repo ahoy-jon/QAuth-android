@@ -19,7 +19,8 @@
         android:layout_height="40dp"
         android:textColor="#FFFFFF"
         android:background="#33000000"
-        android:text="hello" />
+        android:text="hello"
+        android:id="@+id/identitytext" />
     
     <ImageView
         android:layout_width="wrap_content"
@@ -41,7 +42,7 @@
         android:layout_marginRight="15dp"
         android:layout_marginTop="15dp"
         android:layout_marginBottom="15dp"
-        
+        android:id="@+id/qrbutton"
         />
 
 </LinearLayout>
