@@ -20,6 +20,7 @@ import com.google.zxing.integration.android.IntentResult;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.app.Activity;
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.util.Log;
 import android.view.Menu;
@@ -31,10 +32,12 @@ import android.widget.Toast;
 
 public class MainActivity extends Activity implements OnClickListener {
 	private ImageButton btn;
+	ProgressDialog dialog;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		this.requestWindowFeature(Window.FEATURE_NO_TITLE);
+		this.requestWindowFeature(Window.FEATURE_INDETERMINATE_PROGRESS);
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_main);
 		Log.v("qauth", "a");
@@ -59,6 +62,13 @@ public class MainActivity extends Activity implements OnClickListener {
 
 	public void onHttpPostResult(Integer status) {
 		Log.v("qauth", "got status: "+status);
+		try {
+			Thread.sleep(1000);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		dialog.hide();
 		//Intent myIntent = new Intent(HelloWorldActivity.this, WebActivity.class);
 		//myIntent.putExtra("key", str);
 		//HelloWorldActivity.this.startActivity(myIntent);
@@ -70,6 +80,12 @@ public class MainActivity extends Activity implements OnClickListener {
 		if (scanResult != null) {
 			Log.v("qauth", scanResult.getContents());
 			this.finishActivity(requestCode);
+
+			dialog = new ProgressDialog(this);
+			dialog.setMessage("Authenticating...");
+			dialog.setIndeterminate(true);
+			dialog.setCancelable(false);
+			dialog.show();
 
 			new AsyncPostTask(this).execute(scanResult.getContents());
 		} else {
