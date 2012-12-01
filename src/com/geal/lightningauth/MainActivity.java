@@ -28,6 +28,8 @@ import android.view.View;
 import android.view.Window;
 import android.view.View.OnClickListener;
 import android.widget.ImageButton;
+import android.widget.ImageView;
+
 
 public class MainActivity extends Activity implements OnClickListener {
 	private ImageButton btn;
@@ -96,6 +98,8 @@ public class MainActivity extends Activity implements OnClickListener {
 		if ((scanResult != null) && (scanResult.getContents() != null)) {
 			btn.setVisibility(View.GONE);
 			authbtn.setVisibility(View.VISIBLE);
+			ImageView img = (ImageView) findViewById(R.id.logodemo);
+			img.setVisibility(View.VISIBLE);
 			this.finishActivity(requestCode);
 			authurl = scanResult.getContents();
 		} else {

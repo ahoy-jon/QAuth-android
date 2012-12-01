@@ -49,6 +49,17 @@
         android:layout_marginBottom="15dp"
         android:id="@+id/qrbutton"
         />
+
+	<ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:contentDescription="@string/qr"
+        android:src="@drawable/logodemo"
+        android:id="@+id/logodemo"
+        android:visibility="gone"
+        />
+
     <ImageButton
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
