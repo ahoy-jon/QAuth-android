@@ -31,7 +31,9 @@
         android:layout_gravity="center_horizontal"
         android:contentDescription="@string/qr"
         android:src="@drawable/ombrebas"
-        android:paddingBottom="20dp" />
+        android:paddingBottom="20dp"
+        android:layout_marginTop="-10dp"
+        />
 
     <ImageButton
         android:layout_width="wrap_content"
