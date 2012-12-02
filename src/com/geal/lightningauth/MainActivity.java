@@ -55,6 +55,28 @@ public class MainActivity extends Activity implements OnClickListener {
 		authbtn.setOnClickListener((OnClickListener) this);
 	}
 
+	public void showQRScreen() {
+		btn.setVisibility(View.VISIBLE);
+		authbtn.setVisibility(View.GONE);
+		ImageView img = (ImageView) findViewById(R.id.logodemo);
+		img.setVisibility(View.GONE);
+		TextView websitetext = (TextView) findViewById(R.id.websitetext);
+		websitetext.setVisibility(View.GONE);
+		TextView questiontext = (TextView) findViewById(R.id.questiontext);
+		questiontext.setVisibility(View.GONE);
+	}
+
+	public void showAuthScreen() {
+		btn.setVisibility(View.GONE);
+		authbtn.setVisibility(View.VISIBLE);
+		ImageView img = (ImageView) findViewById(R.id.logodemo);
+		img.setVisibility(View.VISIBLE);
+		TextView websitetext = (TextView) findViewById(R.id.websitetext);
+		websitetext.setVisibility(View.VISIBLE);
+		TextView questiontext = (TextView) findViewById(R.id.questiontext);
+		questiontext.setVisibility(View.VISIBLE);
+	}
+
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
 		// Inflate the menu; this adds items to the action bar if it is present.
@@ -89,14 +111,7 @@ public class MainActivity extends Activity implements OnClickListener {
 			e.printStackTrace();
 		}
 		dialog.hide();
-		btn.setVisibility(View.VISIBLE);
-		authbtn.setVisibility(View.GONE);
-		ImageView img = (ImageView) findViewById(R.id.logodemo);
-		img.setVisibility(View.GONE);
-		TextView websitetext = (TextView) findViewById(R.id.websitetext);
-		websitetext.setVisibility(View.GONE);
-		TextView questiontext = (TextView) findViewById(R.id.questiontext);
-		questiontext.setVisibility(View.GONE);
+		showQRScreen();
 		//Intent myIntent = new Intent(HelloWorldActivity.this, WebActivity.class);
 		//myIntent.putExtra("key", str);
 		//HelloWorldActivity.this.startActivity(myIntent);
@@ -106,17 +121,12 @@ public class MainActivity extends Activity implements OnClickListener {
 		super.onActivityResult(requestCode, resultCode, intent);
 		IntentResult scanResult = IntentIntegrator.parseActivityResult(requestCode, resultCode, intent);
 		if ((scanResult != null) && (scanResult.getContents() != null)) {
-			btn.setVisibility(View.GONE);
-			authbtn.setVisibility(View.VISIBLE);
-			ImageView img = (ImageView) findViewById(R.id.logodemo);
-			img.setVisibility(View.VISIBLE);
-			TextView websitetext = (TextView) findViewById(R.id.websitetext);
-			websitetext.setVisibility(View.VISIBLE);
-			TextView questiontext = (TextView) findViewById(R.id.questiontext);
-			questiontext.setVisibility(View.VISIBLE);
+			authurl = scanResult.getContents();
+			Log.v("qauth", authurl);
+			new AsyncPutTask().execute(authurl);
+			showAuthScreen();
 
 			this.finishActivity(requestCode);
-			authurl = scanResult.getContents();
 		} else {
 			Log.v("qauth", "failed intent barcode scanning");
 		}
