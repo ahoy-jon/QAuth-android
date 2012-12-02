@@ -169,7 +169,7 @@ public class MainActivity extends Activity implements OnClickListener {
 				HttpPost http = new HttpPost(urls[0]);
 				List<NameValuePair> nameValuePairs = new ArrayList<NameValuePair>(2);
 				nameValuePairs.add(new BasicNameValuePair("name", "geo"));
-				nameValuePairs.add(new BasicNameValuePair("email", "geo@danston.cul"));
+				nameValuePairs.add(new BasicNameValuePair("email", "geo@angelhack.com"));
 				http.setEntity(new UrlEncodedFormEntity(nameValuePairs));
 
 				HttpResponse response = httpclient.execute(http);
