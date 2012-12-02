@@ -11,6 +11,7 @@ import org.apache.http.StatusLine;
 import org.apache.http.client.HttpClient;
 import org.apache.http.client.entity.UrlEncodedFormEntity;
 import org.apache.http.client.methods.HttpPost;
+import org.apache.http.client.methods.HttpPut;
 import org.apache.http.impl.client.DefaultHttpClient;
 import org.apache.http.message.BasicNameValuePair;
 import com.geal.lightningauth.R;
@@ -168,6 +169,48 @@ public class MainActivity extends Activity implements OnClickListener {
 		protected void onPostExecute(Integer res) {
 			activity.onHttpPostResult(res);
 			//showDialog("Downloaded " + result + " bytes");
+		}
+	}
+
+	private class AsyncPutTask extends AsyncTask<String, Integer, Integer> {
+		//public MainActivity activity;
+		private String result;
+		/*public AsyncPutTask(MainActivity a)
+		{
+			activity = a;
+		}*/
+		protected Integer doInBackground(String... urls) {
+			try {
+				HttpClient httpclient = new DefaultHttpClient();
+
+				HttpPut http = new HttpPut(urls[0]);
+				HttpResponse response = httpclient.execute(http);
+				StatusLine statusLine = response.getStatusLine();
+				if(statusLine.getStatusCode() == HttpStatus.SC_OK){
+					ByteArrayOutputStream out = new ByteArrayOutputStream();
+					response.getEntity().writeTo(out);
+					out.close();
+					result = out.toString();
+					Log.v("qauth", result);
+				} else{
+					result = "no result";
+					//Closes the connection.
+					Log.v("qauth", "closing connection");
+					response.getEntity().getContent().close();
+					//throw new IOException(statusLine.getReasonPhrase());
+				}
+				return statusLine.getStatusCode();
+			} catch(Exception e) {
+
+				Log.v("qauth", "exception: "+e.toString());
+			}
+			return 0;
+		}
+
+		protected void onProgressUpdate(Integer... progress) {
+		}
+
+		protected void onPostExecute(Integer res) {
 		}
 	}
 }
