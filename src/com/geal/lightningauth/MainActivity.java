@@ -20,6 +20,7 @@ import com.google.zxing.integration.android.IntentResult;
 
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.os.Message;
 import android.app.Activity;
 import android.app.ProgressDialog;
 import android.content.Intent;
@@ -65,6 +66,16 @@ public class MainActivity extends Activity implements OnClickListener {
 		authbtn = (ImageButton) findViewById(R.id.authbutton);
 		Log.v("qauth", "d");
 		authbtn.setOnClickListener((OnClickListener) this);
+
+		Intent intent = getIntent();
+		if(intent != null) {
+			String value = intent.getStringExtra("challenge");
+			if(value != null) {
+				Log.v("qauth", "main activity got message: "+value);
+				authurl = value;
+				showAuthScreen();
+			}
+		}
 	}
 
 	public void showQRScreen() {

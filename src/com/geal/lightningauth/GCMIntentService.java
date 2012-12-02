@@ -17,6 +17,10 @@ public class GCMIntentService extends GCMBaseIntentService {
 	@Override
 	protected void onMessage(Context arg0, Intent arg1) {
 		Log.v("qauth", "GCMIntentService: onMessage: "+arg1.getStringExtra("challenge"));
+		Intent myIntent = new Intent(getApplicationContext(), MainActivity.class);
+		myIntent.putExtra("challenge", arg1.getStringExtra("challenge"));
+		myIntent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+		getApplicationContext().startActivity(myIntent);
 
 	}
 
