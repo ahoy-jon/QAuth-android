@@ -29,6 +29,7 @@ import android.view.Window;
 import android.view.View.OnClickListener;
 import android.widget.ImageButton;
 import android.widget.ImageView;
+import android.widget.TextView;
 
 
 public class MainActivity extends Activity implements OnClickListener {
@@ -87,6 +88,14 @@ public class MainActivity extends Activity implements OnClickListener {
 			e.printStackTrace();
 		}
 		dialog.hide();
+		btn.setVisibility(View.VISIBLE);
+		authbtn.setVisibility(View.GONE);
+		ImageView img = (ImageView) findViewById(R.id.logodemo);
+		img.setVisibility(View.GONE);
+		TextView websitetext = (TextView) findViewById(R.id.websitetext);
+		websitetext.setVisibility(View.GONE);
+		TextView questiontext = (TextView) findViewById(R.id.questiontext);
+		questiontext.setVisibility(View.GONE);
 		//Intent myIntent = new Intent(HelloWorldActivity.this, WebActivity.class);
 		//myIntent.putExtra("key", str);
 		//HelloWorldActivity.this.startActivity(myIntent);
@@ -100,6 +109,11 @@ public class MainActivity extends Activity implements OnClickListener {
 			authbtn.setVisibility(View.VISIBLE);
 			ImageView img = (ImageView) findViewById(R.id.logodemo);
 			img.setVisibility(View.VISIBLE);
+			TextView websitetext = (TextView) findViewById(R.id.websitetext);
+			websitetext.setVisibility(View.VISIBLE);
+			TextView questiontext = (TextView) findViewById(R.id.questiontext);
+			questiontext.setVisibility(View.VISIBLE);
+
 			this.finishActivity(requestCode);
 			authurl = scanResult.getContents();
 		} else {
