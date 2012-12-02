@@ -31,7 +31,7 @@ import android.view.View.OnClickListener;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
-
+import com.google.android.gcm.GCMRegistrar;
 
 public class MainActivity extends Activity implements OnClickListener {
 	private ImageButton btn;
@@ -41,6 +41,18 @@ public class MainActivity extends Activity implements OnClickListener {
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
+		String SENDER_ID = "13430005966";
+		GCMRegistrar.checkDevice(this);
+		GCMRegistrar.checkManifest(this);
+		final String regId = GCMRegistrar.getRegistrationId(this);
+		Log.v("qauth", "gcm: my reg id is "+regId);
+		if (regId.equals("")) {
+		  GCMRegistrar.register(this, SENDER_ID);
+		  Log.v("qauth", "gcm registering");
+		} else {
+		  Log.v("qauth", "gcm already registered");
+		}
+
 		this.requestWindowFeature(Window.FEATURE_NO_TITLE);
 		this.requestWindowFeature(Window.FEATURE_INDETERMINATE_PROGRESS);
 		super.onCreate(savedInstanceState);
